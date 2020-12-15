@@ -39,15 +39,21 @@ window.addEventListener("load", function() {
 });
 
 
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
+fetch("https://handlers.education.launchcode.org/static/planets.json")
+.then(function(response){
+  return response.json();
+}).then(function(json){
+   let div=document.getElementById("missionTarget");
+/* This block of code shows how to format the HTML once you fetch some planetary JSON!*/
+div.innerHTML = `
 <h2>Mission Destination</h2>
 <ol>
-   <li>Name: ${Mars}</li>
-   <li>Diameter: ${6779 km}</li>
-   <li>Star: ${Sol}</li>
-   <li>Distance from Earth: ${225 million km from Earth}</li>
-   <li>Number of Moons: ${2}</li>
+   <li>Name: ${json[3].name}</li>
+   <li>Diameter: ${json[3].diameter}</li>
+   <li>Star: ${json[3].star}</li>
+   <li>Distance from Earth: ${json[3].distance}</li>
+   <li>Number of Moons: ${json[3].moons}</li>
 </ol>
-<img src="${https://mars.nasa.gov/system/resources/detail_files/7808_global-color-views-mars-PIA00407-full2.jpg}">
-*/
+<img src="${json[3].image}">
+`
+});
