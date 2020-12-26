@@ -11,27 +11,36 @@ window.addEventListener("load", function() {
           alert("Make sure to enter valid information for each field!");
           event.preventDefault();
        } 
+      if(pilotNameInput && copilotNameInput){ 
+      document.getElementById('faultyItems').style.visibility='visible'
       document.getElementById('pilotStatus').innerHTML=`Pilot ${pilotNameInput}`;
       document.getElementById('copilotStatus').innerHTML=`Co-Pilot ${copilotNameInput}`;
+      }
 
          if(fuelLevelInput<10000){
             document.getElementById('faultyItems').style.visibility='visible';
-            document.getElementById("fuelStatus").innerHTML=`Warning: Fuel too low for launch`
+            document.getElementById('fuelStatus').innerHTML=`Warning: Fuel too low for launch`;
             document.getElementById('launchStatus').innerHTML=`Shuttle not ready for launch`;
             document.getElementById('launchStatus').style.color = "red";
             event.preventDefault();
-         } 
+         } else {
+            document.getElementById('fuelStatus').innerHTML=`Fuel level is enough for launch`;
+            event.preventDefault();
+         }
          
          if(cargoMassInput>10000){
-            document.getElementById("cargoStatus").innerHTML=`Warning: Cargo mass too high for launch`
+            document.getElementById('cargoStatus').innerHTML=`Warning: Cargo mass too high for launch`;
             document.getElementById('launchStatus').innerHTML=`Shuttle not ready for launch`;
             document.getElementById('launchStatus').style.color = "red";
+            event.preventDefault();
+         } else {
+            document.getElementById('cargoStatus').innerHTML=`Cargo mass is enough for launch`;
             event.preventDefault();
          }
 
          if(fuelLevelInput>10000 && cargoMassInput<10000){
             document.getElementById('launchStatus').innerHTML=`Shuttle is ready for launch`;
-            document.getElementById('launchStatus').style.color = "green"
+            document.getElementById('launchStatus').style.color = "green";
             event.preventDefault();
          }
 
